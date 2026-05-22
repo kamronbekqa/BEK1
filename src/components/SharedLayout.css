@@ -15,7 +15,7 @@
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
   padding: 0;
-  min-height: 46px;
+  min-height: 38px;
   display: flex;
   align-items: center;
   position: sticky;
@@ -29,7 +29,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  min-height: 46px;
+  min-height: 38px;
   gap: 12px;
 }
 
@@ -167,9 +167,9 @@
 .admin-nav-link {
   color: var(--accent) !important;
   border: 1px solid var(--accent);
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 6px;
-  font-size: 0.76rem !important;
+  font-size: 0.72rem !important;
   text-transform: uppercase;
 }
 
@@ -192,8 +192,8 @@
 }
 
 .notification-button {
-  width: 34px;
-  height: 34px;
+  width: 28px;
+  height: 28px;
   border-radius: 8px;
   border: 1px solid var(--border-color);
   background: rgba(255, 255, 255, 0.04);
@@ -365,10 +365,10 @@
 }
 
 .auth-btn {
-  padding: 0.42rem 0.75rem;
-  border-radius: 8px;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
   font-weight: 700;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Product, PromoCode, Order, OrderItem
+from core.telegram_utils import send_telegram_message
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -45,6 +46,22 @@ class OrderSerializer(serializers.ModelSerializer):
         if request and request.user.is_authenticated:
             validated_data['customer'] = request.user
         order = Order.objects.create(**validated_data)
+        items_text = ""
         for item_data in items_data:
-            OrderItem.objects.create(order=order, **item_data)
+            item = OrderItem.objects.create(order=order, **item_data)
+            items_text += f"- {item.product.name}: {item.quantity} x {item.price} so'm\n"
+        
+        # Telegramga xabar yuborish
+        message = (
+            f"<b>🆕 Yangi Buyurtma #{order.id}</b>\n\n"
+            f"👤 <b>Mijoz:</b> {order.customer_name}\n"
+            f"📞 <b>Telefon:</b> {order.customer_phone}\n"
+            f"💰 <b>Jami summa:</b> {order.total_price} so'm\n\n"
+            f"🛒 <b>Mahsulotlar:</b>\n{items_text}"
+        )
+        if order.promo_code_used:
+            message += f"\n🎟 <b>Promo kod:</b> {order.promo_code_used.code}"
+            
+        send_telegram_message(message)
+        
         return order

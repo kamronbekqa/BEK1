@@ -5,12 +5,24 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
 from .serializers import UserSerializer
 
+from core.telegram_utils import send_telegram_message
+
 @api_view(['POST'])
 def register_user(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.save()
         token, created = Token.objects.get_or_create(user=user)
+        
+        # Telegramga xabar yuborish
+        text = (
+            "<b>👤 Yangi foydalanuvchi ro'yxatdan o'tdi!</b>\n\n"
+            f"🆔 <b>ID:</b> {user.id}\n"
+            f"👤 <b>Username:</b> {user.username}\n"
+            f"📧 <b>Email:</b> {user.email or 'Kiritilmagan'}"
+        )
+        send_telegram_message(text)
+        
         return Response({
             'token': token.key,
             'user': serializer.data

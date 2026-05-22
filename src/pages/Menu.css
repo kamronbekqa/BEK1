@@ -4,14 +4,14 @@
 }
 
 .page-header {
-  padding: var(--spacing-8) 0 var(--spacing-4) 0;
+  padding: var(--spacing-3) 0 var(--spacing-2) 0;
   text-align: center;
   border-bottom: 1px solid var(--border-color);
   background: radial-gradient(circle at top, rgba(255, 106, 0, 0.05), transparent 80%);
 }
 
 .page-title {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
   font-weight: 800;
   margin-bottom: var(--spacing-2);
   color: var(--text-primary);
